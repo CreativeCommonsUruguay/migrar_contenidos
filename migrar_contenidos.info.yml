@@ -1,0 +1,10 @@
+name: Migrar contenidos
+description: Importa contenidos de tipo autor, obra visual y obra literaria
+package: AUTORES
+dependencies:
+  - crea_estructura
+  - estatus_derechos
+
+type: module
+core: 8.x
+configure: migrar_contenidos.admin_settings

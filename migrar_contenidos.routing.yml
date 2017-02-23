@@ -1,0 +1,15 @@
+migrar_contenidos.admin_settings:
+  path: '/admin/config/migrar_contenidos'
+  defaults:
+    _form: '\Drupal\migrar_contenidos\Form\ModuleConfigurationForm'
+    _title: 'Formulario de carga de archivos para importación de contenidos'
+  requirements:
+    _permission: 'administer site configuration'
+
+migrar_contenidos.content:
+  path: '/migrar_contenidos'
+  defaults:
+    _controller: '\Drupal\migrar_contenidos\Controller\MigrarController::content'
+    _title: 'Migra contenidos'
+  requirements:
+    _permission: 'administer site configuration'

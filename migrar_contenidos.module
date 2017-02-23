@@ -1,0 +1,15 @@
+<?php
+
+function migrar_contenidos_theme($existing, $type, $theme, $path) {
+
+  $arreglo['idArchivoContenidos'] = NULL;
+  $arreglo['idArchivoUsuarios'] = NULL;
+  $arreglo['idArchivoTaxonomias'] = NULL;
+  $arreglo['resultadoMigracion'] = NULL;
+
+  return array(
+    'vista' => array(
+      'variables' => $arreglo,
+    ),
+  );
+}
