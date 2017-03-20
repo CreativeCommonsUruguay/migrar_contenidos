@@ -61,6 +61,13 @@ class ModuleConfigurationForm extends ConfigFormBase {
     );
 
 
+    $form['archivo_a_importarArchivos'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Archivo CSV de archivos:'),
+      '#default_value' => '',
+      '#upload_location' => 'public://',
+      '#upload_validators' => array('file_validate_extensions' => array('csv')),
+    );
 
     return parent::buildForm($form, $form_state);
   }
@@ -75,6 +82,8 @@ class ModuleConfigurationForm extends ConfigFormBase {
     $config->set('idArchivoContenidos', $values['archivo_a_importarContenidos']) ->save();
     $config->set('idArchivoUsuarios', $values['archivo_a_importarUsuarios']) ->save();
     $config->set('idArchivoTaxonomias', $values['archivo_a_importarTaxonomias']) ->save();
+    $config->set('idArchivoArchivos', $values['archivo_a_importarArchivos']) ->save();
+
 
     $url = Url::fromRoute('migrar_contenidos.content');
     $form_state->setRedirectUrl($url);

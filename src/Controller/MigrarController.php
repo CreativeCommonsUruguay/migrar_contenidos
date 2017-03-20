@@ -260,6 +260,119 @@ field_otrasdisciplinas [?]
    } else { $resultado.= "No se migraron autores."; }
 
 
+
+    $resultado.= "<hr>";
+
+    $resultado.= "<h2>Archivos</h2>";
+
+
+
+    $fidArchivo = $config->get('idArchivoArchivos');
+
+   if (isset($fidArchivo[0])) {
+
+    $resultado.= "<ol>";
+      $file = file_load($fidArchivo[0]);
+      $uri = $file->getFileUri();
+      $path = file_create_url($uri);
+
+
+    $archivo = fopen($uri, 'r');
+      $line = fgetcsv($archivo); // Salteo la primer linea;
+      while (($line = fgetcsv($archivo)) !== FALSE) {
+
+/* Copia el archivo desde la URL orígen al nuevo directorio */
+  $uid = 1;
+  $fid = $line[0];
+  $uriarchivo = $line[1];
+
+  $arreglouriarchivo = explode ("/", $uriarchivo);
+  $nombrearchivo = end($arreglouriarchivo);
+  $urldestino = 'public://2017-03/';
+  $urlorigen = 'http://autores.uy/sites/default/files/';
+  copy($urlorigen.$nombrearchivo, $urldestino.$nombrearchivo);
+
+/* Crea el archivo en la base de datos */
+  $file = File::create([
+    'uid' => $uid,
+    'fid' => $fid,
+    'filename' => $nombrearchivo,
+    'uri' => $urldestino.$nombrearchivo,
+    'status' => 1,
+  ]);
+  $file->save();
+
+
+
+/*
+        $file_usage = \Drupal::service('file.usage');
+        $file_usage->add($file, 'mymodule', 'user',$uid);
+        $file->save();
+*/
+/*
+      $nid = $line[0];
+      $title = $line[1];
+      $field_apellidos = $line[2];
+      $field_nombres = $line[3];
+      $field_variantes_de_nombre = $line[4];
+      $field_seudonimos = $line[5];
+
+        $nodonuevo = array (
+            'nid' => $nid,
+            'type' => 'autor',
+            'langcode' => 'es',
+            'field_nombres' => $field_nombres,
+            'field_apellidos' => $field_apellidos,
+            'field_variantes_de_nombre' => $field_variantes_de_nombre,
+            'field_seudonimos' => $field_seudonimos,
+            'field_dia_de_nacimiento' => $field_dia_de_nacimiento,
+            'field_mes_de_nacimiento' => $field_mes_de_nacimiento,
+            'field_ano_de_nacimiento' => $field_ano_de_nacimiento,
+            'field_dia_de_muerte' => $field_dia_de_muerte,
+            'field_mes_de_muerte' => $field_mes_de_muerte,
+            'field_ano_de_muerte' => $field_ano_de_muerte,
+            'field_sexo' => $field_sexo,
+            'field_disciplinaautoral' => $field_disciplinaautoral,
+            'field_lugardenacimiento' => $field_lugardenacimiento,
+            'field_enlaces' => $field_enlaces,
+            'field_notas' => $field_notas,
+            'created' => $created,
+            'changed' => REQUEST_TIME,
+            // The user ID.
+            'uid' => $uid,
+            'title' => $title,
+          );
+
+          $node = Node::create($nodonuevo);
+
+          $node->save();
+
+*/
+
+/* TODO Para la sección de crear libros 
+$node = Node::create([
+  'type'        => 'libro',
+  'title'       => 'Druplicon test',
+  'field_portada' => [
+    'target_id' => 710,
+    'alt' => 'Hello world',
+    'title' => 'Goodbye world'
+  ],
+]);
+          $node->save();
+
+
+*/
+
+      }
+    fclose($archivo);
+
+    $resultado.= "</ol>";
+   } else { $resultado.= "No crearon archivos."; }
+
+
+
+
     $arreglo['#title'] = 'Resultado de la migración';
     $arreglo['#theme'] = "vista";
 
