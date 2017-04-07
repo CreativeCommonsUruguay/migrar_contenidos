@@ -1,0 +1,28 @@
+{
+    "name": "drupal/migrar_contenidos",
+    "description": "Importa contenidos de tipo autor, obra visual y obra literaria",
+    "type": "drupal-module",
+    "homepage": "https://github.com/CreativeCommonsUruguay/migrar_contenidos",
+    "license": "GPL",
+    "authors": [
+      {
+          "name": "Rodrigo",
+          "email": "rbarbano@gmail.com",
+          "role": "Maintainer"
+      },
+      {
+          "name": "Marco",
+          "email": "marcoscalone@gmail.com",
+          "role": "Co-Maintainer"
+      }
+    ],
+    "support": {
+       "issues": "https://github.com/CreativeCommonsUruguay/migrar_contenidos/issues",
+       "source": "https://github.com/CreativeCommonsUruguay/migrar_contenidos"
+     },
+     "minimum-stability": "dev",
+     "require": {
+       "drupal/crea_estructura": "*",
+       "drupal/estatus_derechos": "*"
+     }
+}
