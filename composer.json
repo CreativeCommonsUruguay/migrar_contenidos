@@ -1,7 +1,7 @@
 {
     "name": "drupal/migrar_contenidos",
     "description": "Importa contenidos de tipo autor, obra visual y obra literaria",
-    "type": "drupal-module",
+    "type": "drupal-custom-module",
     "homepage": "https://github.com/CreativeCommonsUruguay/migrar_contenidos",
     "license": "GPL",
     "authors": [
