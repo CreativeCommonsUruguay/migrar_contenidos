@@ -6,6 +6,8 @@ function migrar_contenidos_theme($existing, $type, $theme, $path) {
   $arreglo['idArchivoUsuarios'] = NULL;
   $arreglo['idArchivoTaxonomias'] = NULL;
   $arreglo['idArchivoArchivos'] = NULL;
+  $arreglo['idArchivoLibros'] = NULL;
+  $arreglo['idArchivoObrasVisuales'] = NULL;
   $arreglo['resultadoMigracion'] = NULL;
 
   return array(

@@ -69,6 +69,30 @@ class ModuleConfigurationForm extends ConfigFormBase {
       '#upload_validators' => array('file_validate_extensions' => array('csv')),
     );
 
+    $form['archivo_a_importarLibros'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Archivo CSV de libros:'),
+      '#default_value' => '',
+      '#upload_location' => 'public://',
+      '#upload_validators' => array('file_validate_extensions' => array('csv')),
+    );
+    
+    $form['archivo_a_importarVisuales'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Archivo CSV de obras visuales:'),
+      '#default_value' => '',
+      '#upload_location' => 'public://',
+      '#upload_validators' => array('file_validate_extensions' => array('csv')),
+    );
+
+    $form['archivo_a_IdWdAutores'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Archivo CSV de ID de Wd de autores:'),
+      '#default_value' => '',
+      '#upload_location' => 'public://',
+      '#upload_validators' => array('file_validate_extensions' => array('csv')),
+    );
+    
     return parent::buildForm($form, $form_state);
   }
 
@@ -83,7 +107,10 @@ class ModuleConfigurationForm extends ConfigFormBase {
     $config->set('idArchivoUsuarios', $values['archivo_a_importarUsuarios']) ->save();
     $config->set('idArchivoTaxonomias', $values['archivo_a_importarTaxonomias']) ->save();
     $config->set('idArchivoArchivos', $values['archivo_a_importarArchivos']) ->save();
+    $config->set('idArchivoLibros', $values['archivo_a_importarLibros']) ->save();
+    $config->set('idArchivoObrasVisuales', $values['archivo_a_importarVisuales']) ->save();
 
+    $config->set('idArchivoAutoresWD', $values['archivo_a_IdWdAutores']) ->save();
 
     $url = Url::fromRoute('migrar_contenidos.content');
     $form_state->setRedirectUrl($url);
